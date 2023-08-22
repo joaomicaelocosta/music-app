@@ -17,8 +17,6 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
-  const [isMuted, setIsMuted] = useState(false);
-  const [prevVolume, setPrevVolume] = useState(1);
 
   const onVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = Number(e.target.value) / 100;
@@ -28,7 +26,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   };
 
-  const toggleMute = () => {
+  /* const toggleMute = () => {
     if (audioRef.current) {
       if (isMuted) {
         setVolume(prevVolume);
@@ -40,7 +38,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
       }
       setIsMuted(!isMuted);
     }
-  };
+  }; */
 
   const onPlayPause = () => {
     if (audioRef.current) {
@@ -85,15 +83,6 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         audioRef.current.play().catch((error) => console.log(error));
       }
     }
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener(
-          "loadedmetadata",
-          handleLoadedMetadata
-        );
-      }
-    };
   }, [song, isPlaying]);
 
   useEffect(() => {
@@ -108,12 +97,6 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     if (audioRef.current) {
       audioRef.current.addEventListener("timeupdate", updateProgress);
     }
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener("timeupdate", updateProgress);
-      }
-    };
   }, []);
 
   return (

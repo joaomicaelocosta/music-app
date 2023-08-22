@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SongList from "../SongList/SongList";
 import { Song } from "../../../types/song";
 import "./SidePanel.css";

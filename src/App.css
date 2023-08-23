@@ -36,7 +36,12 @@ body {
   position: relative;
   z-index: 5;
 }
-.sound-wave {
+
+.wave-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -45,6 +50,14 @@ body {
   width: 100%; /* Full width */
   height: 100vh; /* Full viewport height */
   overflow: hidden;
+}
+.wave-top {
+  position: absolute;
+  top: 50%;
+}
+.wave-bottom {
+  position: absolute;
+  bottom: 50%;
 }
 
 @media (max-width: 768px) {

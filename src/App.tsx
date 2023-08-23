@@ -48,21 +48,30 @@ const App = () => {
           onToggleSidePanel={handleToggle}
         />
       </div>
-      {selectedSong ? (
-        <div className="player">
-          <Display
-            cover={selectedSong.cover}
-            name={selectedSong.name}
-            artist={selectedSong.artist}
-          />
-          <PlayerControls
-            song={selectedSong}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-          />
+      <div className="player">
+        {selectedSong ? (
+          <div>
+            <Display
+              cover={selectedSong.cover}
+              name={selectedSong.name}
+              artist={selectedSong.artist}
+            />
+            <PlayerControls
+              song={selectedSong}
+              onNext={handleNext}
+              onPrevious={handlePrevious}
+            />
+          </div>
+        ) : null}
+        <div className="wave-container">
+          <div className="wave-top">
+            <SoundWaves />
+          </div>
+          <div className="wave-bottom">
+            <SoundWaves />
+          </div>
         </div>
-      ) : null}
-      <SoundWaves />
+      </div>
     </div>
   );
 };

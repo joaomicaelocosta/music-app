@@ -9,12 +9,14 @@ interface SidePanelProps {
   songs: Song[];
   onSelectSong: (song: Song) => void;
   onToggleSidePanel: () => void;
+  selectedSong: Song;
 }
 
 const SidePanel: React.FC<SidePanelProps> = ({
   songs,
   onSelectSong,
   onToggleSidePanel,
+  selectedSong,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -40,7 +42,11 @@ const SidePanel: React.FC<SidePanelProps> = ({
           onClick={() => searchTerm && setSearchTerm("")}
         />
       </div>
-      <SongList songs={filteredSongs} onSelectSong={onSelectSong} />
+      <SongList
+        songs={filteredSongs}
+        onSelectSong={onSelectSong}
+        selectedSong={selectedSong}
+      />
     </div>
   );
 };

@@ -1,3 +1,4 @@
-.song-list ul {
-  padding-left: 0;
+.song-list {
+  flex-grow: 1; /* Will grow to occupy remaining space */
+  overflow-y: auto; /* Enables vertical scrolling if content overflows */
 }

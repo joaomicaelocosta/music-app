@@ -5,8 +5,12 @@
   padding: 0.5rem 1rem;
 }
 
+.song-item.active {
+  background-color: #a8d4f3;
+}
+
 .song-item:hover {
-  background-color: #69b3e8;
+  background-color: #a8d4f3;
 }
 
 .song-cover img {

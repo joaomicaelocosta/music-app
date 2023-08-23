@@ -14,6 +14,13 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  scrollbar-face-color: #888;
+  scrollbar-track-color: transparent;
+  scrollbar-arrow-color: transparent;
+  scrollbar-shadow-color: #888;
+  scrollbar-highlight-color: #888;
+  scrollbar-3dlight-color: transparent;
+  scrollbar-darkshadow-color: transparent;
 }
 .player {
   width: 100%;
@@ -45,8 +52,8 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  width: 100%; /* Full width */
-  height: 100vh; /* Full viewport height */
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 .wave-top {
@@ -56,6 +63,23 @@ body {
 .wave-bottom {
   position: absolute;
   bottom: 50%;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 @media (max-width: 768px) {

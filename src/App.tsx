@@ -5,14 +5,14 @@ import chillHop from "./utils/data";
 import Display from "./components/Display/Display";
 import { Song } from "./types/song";
 import PlayerControls from "./components/PlayerControls/PlayerControls";
-import SoundWaves from "./components/SoundWaveComponent/SoundWave";
+import SoundWaves from "./components/AnimatedComponents/SoundWave";
 
 const songs = chillHop();
 
 const App: React.FC = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [isActive, setIsActive] = useState(false);
-  const [selectedSong, setSelectedSong] = useState<Song | null>(
+  const [selectedSong, setSelectedSong] = useState<Song>(
     songs[currentSongIndex]
   );
 
@@ -51,6 +51,7 @@ const App: React.FC = () => {
           songs={songs}
           onSelectSong={handleSelectSong}
           onToggleSidePanel={handleToggle}
+          selectedSong={selectedSong}
         />
       </div>
       <div className="player">

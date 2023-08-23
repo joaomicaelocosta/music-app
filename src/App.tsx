@@ -17,21 +17,25 @@ const App: React.FC = () => {
   );
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Change the playing state
   const handlePlayingChange = (playing: boolean) => {
     setIsPlaying(playing);
   };
 
+  // Set a selected song
   const handleSelectSong = (song: Song) => {
     setSelectedSong(song);
     setCurrentSongIndex(songs.indexOf(song));
   };
 
+  // Go to next song
   const handleNext = () => {
     const nextIndex = (currentSongIndex + 1) % songs.length;
     setCurrentSongIndex(nextIndex);
     setSelectedSong(songs[nextIndex]);
   };
 
+  // Go to previous song
   const handlePrevious = () => {
     const previousIndex =
       currentSongIndex - 1 < 0 ? songs.length - 1 : currentSongIndex - 1;
@@ -39,12 +43,14 @@ const App: React.FC = () => {
     setSelectedSong(songs[previousIndex]);
   };
 
+  // Choose the next song randomly
   const handleShuffle = () => {
     const randomIndex = Math.floor(Math.random() * songs.length);
     setCurrentSongIndex(randomIndex);
     setSelectedSong(songs[randomIndex]);
   };
 
+  // Toggle for mobile list view
   const handleToggle = () => {
     setIsActive(!isActive);
   };

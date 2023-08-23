@@ -191,7 +191,7 @@ input[type="range"]::-ms-track {
     display: none;
   }
   .player-controls {
-    gap: 1rem;
+    gap: 3.5rem;
   }
 }
 

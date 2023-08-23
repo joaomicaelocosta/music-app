@@ -22,6 +22,7 @@ const SidePanel: React.FC<SidePanelProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Filter songs by search term
   const filteredSongs = songs.filter((song) =>
     song.name.toLowerCase().includes(searchTerm.toLowerCase())
   );

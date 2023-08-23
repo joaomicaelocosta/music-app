@@ -28,6 +28,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [audioLength, setAudioLength] = useState(0);
 
+  // Change volume
   const onVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = Number(e.target.value) / 100;
     setVolume(newVolume);
@@ -38,6 +39,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     document.documentElement.style.setProperty("--volume", volume);
   };
 
+  // Play or pause the song
   const onPlayPause = () => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -50,6 +52,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   };
 
+  // Scrub through the song
   const onScrub = (value: string) => {
     setProgress(Number(value));
     document.documentElement.style.setProperty("--progress", value + "%");
@@ -59,6 +62,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   };
 
+  // Go to next song
   const handleNext = () => {
     if (shuffle) {
       onShuffle();
@@ -68,6 +72,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     setIsPlaying(true);
   };
 
+  // Go to previous song
   const handlePrevious = () => {
     if (shuffle) {
       onShuffle();
@@ -77,12 +82,14 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     setIsPlaying(true);
   };
 
+  // Format time
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
+  // On song change check if shuffle or repeat is on
   useEffect(() => {
     const handleTransition = () => {
       if (repeat) {
@@ -100,6 +107,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   }, [repeat, shuffle]);
 
+  // Reset progress bar on song change
   useEffect(() => {
     setProgress(0);
 
@@ -117,6 +125,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   }, [song, isPlaying]);
 
+  // Update progress bar
   useEffect(() => {
     document.documentElement.style.setProperty("--volume", "100%");
 
@@ -137,6 +146,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   }, []);
 
+  // Update current time
   useEffect(() => {
     const audioElement = audioRef.current;
 

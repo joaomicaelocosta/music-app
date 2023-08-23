@@ -36,20 +36,6 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     document.documentElement.style.setProperty("--volume", volume);
   };
 
-  /* const toggleMute = () => {
-    if (audioRef.current) {
-      if (isMuted) {
-        setVolume(prevVolume);
-        audioRef.current.volume = prevVolume;
-      } else {
-        setPrevVolume(volume);
-        setVolume(0);
-        audioRef.current.volume = 0;
-      }
-      setIsMuted(!isMuted);
-    }
-  }; */
-
   const onPlayPause = () => {
     if (audioRef.current) {
       if (isPlaying) {

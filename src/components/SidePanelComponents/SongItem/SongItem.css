@@ -24,8 +24,11 @@
   flex-direction: column;
 }
 
-.song-name,
-.song-artist {
+.song-details .song-name {
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
+}
+.song-details .song-artist {
+  margin: 0;
+  font-size: 14px;
 }

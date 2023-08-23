@@ -9,7 +9,7 @@ import SoundWaves from "./components/SoundWaveComponent/SoundWave";
 
 const songs = chillHop();
 
-const App = () => {
+const App: React.FC = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [isActive, setIsActive] = useState(false);
   const [selectedSong, setSelectedSong] = useState<Song | null>(

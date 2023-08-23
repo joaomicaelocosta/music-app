@@ -1,7 +1,7 @@
 .side-panel {
   width: 350px;
   height: 100%;
-  padding: 0.1rem 0;
+  padding: 1rem 0;
   background-color: #fff;
   text-align: left;
 }
@@ -16,6 +16,31 @@
 
 .line {
   display: none;
+}
+
+.input-container {
+  position: relative;
+  padding: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #555;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.icon-search {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

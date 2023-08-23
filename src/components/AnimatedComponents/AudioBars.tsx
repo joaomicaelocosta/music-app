@@ -7,6 +7,7 @@ const Bars: React.FC = () => {
   const ref2 = useRef<THREE.Mesh>(null!);
   const ref3 = useRef<THREE.Mesh>(null!);
 
+  // Animate the bars
   useFrame(() => {
     ref1.current.scale.y = 0.5 + Math.sin(Date.now() / 500) * 0.5;
     ref2.current.scale.y = 0.5 + Math.sin(Date.now() / 250) * 0.5;

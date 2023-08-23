@@ -9,6 +9,7 @@ interface PlayerControlsProps {
   onNext: () => void;
   onPrevious: () => void;
   onShuffle: () => void;
+  onPlayingChange: (playing: boolean) => void;
 }
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
@@ -16,6 +17,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   onNext,
   onPrevious,
   onShuffle,
+  onPlayingChange,
 }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -44,6 +46,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         audioRef.current.play();
       }
       setIsPlaying(!isPlaying);
+      onPlayingChange(!isPlaying);
     }
   };
 
@@ -57,12 +60,20 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   const handleNext = () => {
-    onNext();
+    if (shuffle) {
+      onShuffle();
+    } else {
+      onNext();
+    }
     setIsPlaying(true);
   };
 
   const handlePrevious = () => {
-    onPrevious();
+    if (shuffle) {
+      onShuffle();
+    } else {
+      onPrevious();
+    }
     setIsPlaying(true);
   };
 

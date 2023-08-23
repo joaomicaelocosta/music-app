@@ -7,12 +7,14 @@ interface SongItemProps {
   song: Song;
   onSelectSong?: (song: Song) => void;
   selectedSong: Song;
+  isPlaying: boolean;
 }
 
 const SongItem: React.FC<SongItemProps> = ({
   song,
   onSelectSong,
   selectedSong,
+  isPlaying,
 }) => {
   const isSelected = selectedSong === song;
 
@@ -28,7 +30,9 @@ const SongItem: React.FC<SongItemProps> = ({
         <div className="song-name">{song.name}</div>
         <div className="song-artist">{song.artist}</div>
       </div>
-      <div className="song-icon">{isSelected && <AudioBars />}</div>
+      <div className="song-icon">
+        {isSelected && isPlaying && <AudioBars />}
+      </div>
     </li>
   );
 };

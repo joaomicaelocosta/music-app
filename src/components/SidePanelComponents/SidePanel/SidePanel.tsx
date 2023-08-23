@@ -10,6 +10,7 @@ interface SidePanelProps {
   onSelectSong: (song: Song) => void;
   onToggleSidePanel: () => void;
   selectedSong: Song;
+  isPlaying: boolean;
 }
 
 const SidePanel: React.FC<SidePanelProps> = ({
@@ -17,6 +18,7 @@ const SidePanel: React.FC<SidePanelProps> = ({
   onSelectSong,
   onToggleSidePanel,
   selectedSong,
+  isPlaying,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -46,6 +48,7 @@ const SidePanel: React.FC<SidePanelProps> = ({
         songs={filteredSongs}
         onSelectSong={onSelectSong}
         selectedSong={selectedSong}
+        isPlaying={isPlaying}
       />
     </div>
   );

@@ -8,12 +8,14 @@ interface SongListProps {
   songs: Song[];
   onSelectSong: (song: Song) => void;
   selectedSong: Song;
+  isPlaying: boolean;
 }
 
 const SongList: React.FC<SongListProps> = ({
   songs,
   onSelectSong,
   selectedSong,
+  isPlaying,
 }) => {
   return (
     <div className="song-list">
@@ -24,6 +26,7 @@ const SongList: React.FC<SongListProps> = ({
             song={song}
             onSelectSong={onSelectSong}
             selectedSong={selectedSong}
+            isPlaying={isPlaying}
           />
         ))}
       </ul>

@@ -15,6 +15,11 @@ const App: React.FC = () => {
   const [selectedSong, setSelectedSong] = useState<Song>(
     songs[currentSongIndex]
   );
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlayingChange = (playing: boolean) => {
+    setIsPlaying(playing);
+  };
 
   const handleSelectSong = (song: Song) => {
     setSelectedSong(song);
@@ -52,6 +57,7 @@ const App: React.FC = () => {
           onSelectSong={handleSelectSong}
           onToggleSidePanel={handleToggle}
           selectedSong={selectedSong}
+          isPlaying={isPlaying}
         />
       </div>
       <div className="player">
@@ -67,6 +73,7 @@ const App: React.FC = () => {
               onNext={handleNext}
               onPrevious={handlePrevious}
               onShuffle={handleShuffle}
+              onPlayingChange={handlePlayingChange}
             />
           </div>
         ) : null}

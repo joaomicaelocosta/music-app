@@ -14,10 +14,37 @@ body {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  position: relative;
 }
 
 .App .panel button {
   display: none;
+}
+
+.player-container {
+  position: relative;
+  z-index: 5;
+}
+
+.panel {
+  position: relative;
+  z-index: 5;
+  box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.display-container {
+  position: relative;
+  z-index: 5;
+}
+.sound-wave {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -35,11 +62,12 @@ body {
   .App .panel {
     position: absolute;
     transition: transform 0.3s ease;
-
+    width: 100%;
     z-index: 10;
     bottom: 0;
     transform: translate(-50%, 90%);
     left: 50%;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
   }
 
   .App .panel.active {

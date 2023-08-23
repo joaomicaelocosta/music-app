@@ -5,6 +5,7 @@ import chillHop from "./utils/data";
 import Display from "./components/Display/Display";
 import { Song } from "./types/song";
 import PlayerControls from "./components/PlayerControls/PlayerControls";
+import SoundWaves from "./components/SoundWaveComponent/SoundWave";
 
 const songs = chillHop();
 
@@ -61,6 +62,7 @@ const App = () => {
           />
         </div>
       ) : null}
+      <SoundWaves />
     </div>
   );
 };

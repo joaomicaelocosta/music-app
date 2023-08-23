@@ -34,8 +34,13 @@ const App = () => {
     setSelectedSong(songs[previousIndex]);
   };
 
+  const handleShuffle = () => {
+    const randomIndex = Math.floor(Math.random() * songs.length);
+    setCurrentSongIndex(randomIndex);
+    setSelectedSong(songs[randomIndex]);
+  };
+
   const handleToggle = () => {
-    console.log("toggleSidePanel");
     setIsActive(!isActive);
   };
 
@@ -60,6 +65,7 @@ const App = () => {
               song={selectedSong}
               onNext={handleNext}
               onPrevious={handlePrevious}
+              onShuffle={handleShuffle}
             />
           </div>
         ) : null}

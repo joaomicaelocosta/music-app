@@ -1,22 +1,30 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Song } from "../../types/song";
 import "./PlayerControls.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShuffle, faRepeat } from "@fortawesome/free-solid-svg-icons";
 
 interface PlayerControlsProps {
   song: Song;
   onNext: () => void;
   onPrevious: () => void;
+  onShuffle: () => void;
 }
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   song,
   onNext,
   onPrevious,
+  onShuffle,
 }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [audioLength, setAudioLength] = useState(0);
 
   const onVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = Number(e.target.value) / 100;
@@ -24,6 +32,8 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     if (audioRef.current) {
       audioRef.current.volume = newVolume;
     }
+    const volume = `${Number(e.target.value)}%`;
+    document.documentElement.style.setProperty("--volume", volume);
   };
 
   /* const toggleMute = () => {
@@ -53,6 +63,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
 
   const onScrub = (value: string) => {
     setProgress(Number(value));
+    document.documentElement.style.setProperty("--progress", value + "%");
     if (audioRef.current) {
       audioRef.current.currentTime =
         (Number(value) / 100) * audioRef.current.duration;
@@ -68,6 +79,30 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     onPrevious();
     setIsPlaying(true);
   };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+  };
+
+  useEffect(() => {
+    const handleTransition = () => {
+      if (repeat) {
+        audioRef.current?.play();
+      } else if (shuffle) {
+        onShuffle();
+      } else {
+        onNext();
+      }
+      setIsPlaying(true);
+    };
+
+    if (audioRef.current) {
+      audioRef.current.onended = handleTransition;
+    }
+  }, [repeat, shuffle]);
+
   useEffect(() => {
     setProgress(0);
 
@@ -86,10 +121,16 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   }, [song, isPlaying]);
 
   useEffect(() => {
+    document.documentElement.style.setProperty("--volume", "100%");
+
     const updateProgress = () => {
       if (audioRef.current) {
         const progressValue =
           (audioRef.current.currentTime / audioRef.current.duration) * 100;
+        document.documentElement.style.setProperty(
+          "--progress",
+          progressValue + "%"
+        );
         setProgress(progressValue);
       }
     };
@@ -99,17 +140,43 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    const audioElement = audioRef.current;
+
+    if (audioElement) {
+      setAudioLength(audioElement.duration);
+
+      const updateTime = () => {
+        setCurrentTime(audioElement.currentTime);
+      };
+
+      audioElement.addEventListener("timeupdate", updateTime);
+      audioElement.addEventListener("loadedmetadata", () => {
+        setAudioLength(audioElement.duration);
+      });
+
+      return () => {
+        audioElement.removeEventListener("timeupdate", updateTime);
+      };
+    }
+  }, [audioRef]);
+
   return (
     <div className="player-container">
       <div className="scroller">
-        <input
-          className="progress-bar"
-          type="range"
-          min="0"
-          max="100"
-          value={progress}
-          onChange={(e) => onScrub(e.target.value)}
-        />
+        <div className="progress-bar">
+          <span className="current-time">{formatTime(currentTime)}</span>
+          <input
+            type="range"
+            className="audio-progress"
+            min="0"
+            max="100"
+            value={isNaN(progress) ? 0 : progress}
+            onChange={(e) => onScrub(e.target.value)}
+          />
+          <span className="total-time">{formatTime(audioLength)}</span>
+        </div>
+
         <div className="volume-control">
           <i
             className={` ${
@@ -131,6 +198,12 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
 
       <audio ref={audioRef} src={song.audio} />
       <div className="player-controls">
+        <button
+          className={`icon-button ${shuffle ? "active" : ""}`}
+          onClick={() => setShuffle(!shuffle)}
+        >
+          <FontAwesomeIcon icon={faShuffle} />
+        </button>
         <button className="icon-button" onClick={handlePrevious}>
           <i className="fas fa-chevron-left"></i>
         </button>
@@ -143,6 +216,12 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         </button>
         <button className="icon-button" onClick={handleNext}>
           <i className="fas fa-chevron-right"></i>
+        </button>
+        <button
+          className={`icon-button ${repeat ? "active" : ""}`}
+          onClick={() => setRepeat(!repeat)}
+        >
+          <FontAwesomeIcon icon={faRepeat} />
         </button>
       </div>
     </div>

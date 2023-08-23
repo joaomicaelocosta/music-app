@@ -11,6 +11,10 @@ A feature-rich music player built using React, TypeScript, and CSS. Utilizing th
 - **Mobile Responsive**: Enjoy your music on the go with the mobile-friendly version.
 - **Three.js Animations**: Experience visual effects driven by the Three.js library.
 
+## Note Regarding Scrolling Demonstration
+
+To showcase the scrolling functionality, the song list has been intentionally duplicated in the project. This enables users to see and interact with the scrolling feature more effectively.
+
 ## Starting the App
 
 ### Prerequisites

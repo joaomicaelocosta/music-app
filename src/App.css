@@ -11,6 +11,9 @@
   flex-direction: row;
   min-height: 100vh;
 }
+
+
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -22,6 +25,7 @@ body {
   scrollbar-3dlight-color: transparent;
   scrollbar-darkshadow-color: transparent;
 }
+
 .player {
   width: 100%;
   display: flex;
@@ -56,10 +60,12 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
 .wave-top {
   position: absolute;
   top: 50%;
 }
+
 .wave-bottom {
   position: absolute;
   bottom: 50%;

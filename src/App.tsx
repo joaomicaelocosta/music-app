@@ -5,7 +5,7 @@ import chillHop from "./utils/data";
 import Display from "./components/Display/Display";
 import { Song } from "./types/song";
 import PlayerControls from "./components/PlayerControls/PlayerControls";
-import SoundWaves from "./components/AnimatedComponents/SoundWave";
+import WaveBackground from "./components/AnimatedComponents/WaveBackground";
 
 const songs = chillHop();
 
@@ -57,6 +57,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
+      <WaveBackground />
       <div className={`panel ${isActive ? "active" : ""}`}>
         <SidePanel
           songs={songs}
@@ -83,15 +84,8 @@ const App: React.FC = () => {
             />
           </div>
         ) : null}
-        <div className="wave-container">
-          <div className="wave-top">
-            <SoundWaves />
-          </div>
-          <div className="wave-bottom">
-            <SoundWaves />
-          </div>
-        </div>
       </div>
+
     </div>
   );
 };
